@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HarajTask</string>
+    <string name="comments_count">(%d)</string>
 </resources>

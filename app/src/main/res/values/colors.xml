@@ -3,4 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorPostTitle">#22913b</color>
+    <color name="colorPostSubText">#6c6d6c</color>
+    <color name="colorIcons">#6c6d6c</color>
 </resources>
