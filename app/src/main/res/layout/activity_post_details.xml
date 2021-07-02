@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.example.harajtask.models.Post" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.postDetails.PostDetailsActivity">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_share" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_post_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:src="@{post.thumbURL}"
+                    tools:src="@drawable/ic_launcher_background" />
+
+
+                <TextView
+                    android:id="@+id/tv_post_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{post.title}"
+                    android:textColor="@color/colorPostTitle"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_post_image"
+                    tools:text="Toyota Camry GLE 201aasd9" />
+
+                <TextView
+                    android:id="@+id/tv_post_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/colorPostSubText"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_post_title"
+                    app:specificTimeText="@{post.date}"
+                    tools:text="2021/05/25 11:35PM" />
+
+                <ImageView
+                    android:id="@+id/iv_user_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_user"
+                    app:layout_constraintStart_toStartOf="@id/tv_post_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_post_date" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:text="@{post.username}"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_user_icon"
+                    app:layout_constraintStart_toEndOf="@id/iv_user_icon"
+                    app:layout_constraintTop_toTopOf="@id/iv_user_icon"
+                    tools:text="Abdul Rehman" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.66" />
+
+                <ImageView
+                    android:id="@+id/iv_location_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_user_icon"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/iv_user_icon" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:text="@{post.city}"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_location_icon"
+                    app:layout_constraintStart_toEndOf="@id/iv_location_icon"
+                    app:layout_constraintTop_toTopOf="@id/iv_location_icon"
+                    tools:text="Riyadh" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{post.body}"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_user_icon"
+                    tools:text="3 kittens for sale with their mom.\nAge: The 3 kittens 46 days and the mother is 1 year and 4 months
+* The big cat is vaccinatined
+The kittens are so playful and they love kids, very healthy and they started to eat dry food! The big cat is so lovely and healthy she eats canes food and fry food.
+The price of white kittens (females) is 1,500 each.
+The price of the tiger (female) one is 1,500
+And for the big cat (female) 1,000
+For more information please contact me on WhatsApp. Thank you" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

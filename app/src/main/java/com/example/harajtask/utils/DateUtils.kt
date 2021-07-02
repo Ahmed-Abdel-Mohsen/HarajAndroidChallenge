@@ -12,6 +12,7 @@ class DateUtils {
 
         private val sdf: DateFormat = SimpleDateFormat("d MMM", Locale.ENGLISH)
         private val sdfY: DateFormat = SimpleDateFormat("d MMM yyyy", Locale.ENGLISH)
+        private val sdfFullDate: DateFormat = SimpleDateFormat("yyyy/MM/dd h:mmaa", Locale.ENGLISH)
 
         fun getTimeString(timestamp_: Long): String {
             var timestamp = timestamp_
@@ -50,16 +51,30 @@ class DateUtils {
                     "Since yesterday"
                 }
                 today.get(Calendar.YEAR) == timeCal.get(Calendar.YEAR) -> {
-                    "Since " + capsAMtoSmall(sdf.format(timeCal.time))
+                    "Since " + sdf.format(timeCal.time)
                 }
                 else -> {
-                    "Since" + capsAMtoSmall(sdfY.format(timeCal.time))
+                    "Since" + sdfY.format(timeCal.time)
                 }
             }
         }
 
-        private fun capsAMtoSmall(time: String): String {
-            return time.replace("AM", "am").replace("PM", "pm")
+        fun getSpecificDate(timestamp_: Long) : String{
+            var timestamp = timestamp_
+
+            if (timestamp < 1000000000000L) {
+                timestamp *= 1000
+            }
+
+            val timeCal: Calendar = Calendar.getInstance()
+            timeCal.timeInMillis = timestamp
+
+            val now = System.currentTimeMillis()
+            if (timestamp > now || timestamp <= 0) {
+                return ""
+            }
+
+            return sdfFullDate.format(timeCal.time)
         }
     }
 }

@@ -1,5 +1,9 @@
 package com.example.harajtask.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Post(
     val title: String,
     val username: String,
@@ -8,4 +12,4 @@ data class Post(
     val city: String,
     val date: Long,
     val body: String
-)
+) : Parcelable

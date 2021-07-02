@@ -8,7 +8,8 @@ import com.example.harajtask.R
 import com.example.harajtask.databinding.PostListItemBinding
 import com.example.harajtask.models.Post
 
-class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
+class PostsAdapter(val listener: PostClickListener) :
+    RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
     private var posts: Array<Post> = arrayOf()
 
     fun setPosts(posts: Array<Post>) {
@@ -35,9 +36,18 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
         return posts.size
     }
 
-    class PostViewHolder(var binding: PostListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PostViewHolder(var binding: PostListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
             binding.post = post
+
+            binding.root.setOnClickListener {
+                listener.onClickPost(post)
+            }
         }
+    }
+
+    interface PostClickListener {
+        fun onClickPost(post: Post)
     }
 }

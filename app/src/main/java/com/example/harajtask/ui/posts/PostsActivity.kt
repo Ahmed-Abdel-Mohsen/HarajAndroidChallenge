@@ -1,13 +1,16 @@
 package com.example.harajtask.ui.posts
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.harajtask.databinding.ActivityPostsBinding
 import com.example.harajtask.models.Post
+import com.example.harajtask.ui.postDetails.PostDetailsActivity
+import com.example.harajtask.utils.POST_BUNDLE_KEY
 
-class PostsActivity : AppCompatActivity() {
+class PostsActivity : AppCompatActivity(), PostsAdapter.PostClickListener {
     lateinit var binding: ActivityPostsBinding
     lateinit var viewModel: PostsActivityViewModel
 
@@ -32,7 +35,7 @@ class PostsActivity : AppCompatActivity() {
     }
 
     private fun displayPosts(posts: Array<Post>) {
-        val adapter = PostsAdapter()
+        val adapter = PostsAdapter(this)
 
         adapter.setPosts(posts)
 
@@ -44,5 +47,11 @@ class PostsActivity : AppCompatActivity() {
         binding.rvPosts.layoutManager = linearLayoutManager
 
         binding.rvPosts.adapter = adapter
+    }
+
+    override fun onClickPost(post: Post) {
+        val intent = Intent(this, PostDetailsActivity::class.java)
+        intent.putExtra(POST_BUNDLE_KEY, post)
+        startActivity(intent)
     }
 }

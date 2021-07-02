@@ -30,3 +30,8 @@ fun loadImage(imageView: ImageView, url: String?) {
 fun timeText(textView: TextView, timeStamp: Long) {
     textView.text = DateUtils.getTimeString(timeStamp)
 }
+
+@BindingAdapter("app:specificTimeText")
+fun specificTimeText(textView: TextView, timeStamp: Long) {
+    textView.text = DateUtils.getSpecificDate(timeStamp)
+}
