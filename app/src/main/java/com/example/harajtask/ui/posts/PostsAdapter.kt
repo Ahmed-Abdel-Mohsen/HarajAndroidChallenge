@@ -9,9 +9,9 @@ import com.example.harajtask.databinding.PostListItemBinding
 import com.example.harajtask.models.Post
 
 class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
-    private var posts: MutableList<Post> = mutableListOf()
+    private var posts: Array<Post> = arrayOf()
 
-    fun setPosts(posts: MutableList<Post>) {
+    fun setPosts(posts: Array<Post>) {
         this.posts = posts
     }
 

@@ -1,42 +1,45 @@
 package com.example.harajtask.ui.posts
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.harajtask.R
 import com.example.harajtask.databinding.ActivityPostsBinding
 import com.example.harajtask.models.Post
-import com.google.gson.Gson
 
 class PostsActivity : AppCompatActivity() {
     lateinit var binding: ActivityPostsBinding
-    var posts: MutableList<Post> = mutableListOf()
+    lateinit var viewModel: PostsActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        readJson()
+        initViewModel()
+        setupObservers()
     }
 
-    private fun readJson() {
-        val str = assets.open("data.json").bufferedReader().use { it.readText() }
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(PostsActivityViewModel::class.java)
 
-        posts = Gson().fromJson(str, Array<Post>::class.java).toMutableList()
+        viewModel.loadPosts(assets)
+    }
 
-        posts.forEach{
-            Log.d("jj1", "userName: " + it.username)
-            Log.d("jj1", "timestamp: " + it.date)
-        }
+    private fun setupObservers() {
+        viewModel.postsLiveData.observe(this, {
+            displayPosts(it)
+        })
+    }
 
+    private fun displayPosts(posts: Array<Post>) {
         val adapter = PostsAdapter()
 
         adapter.setPosts(posts)
 
-        val linearLayoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL, false
+        )
 
         binding.rvPosts.layoutManager = linearLayoutManager
 

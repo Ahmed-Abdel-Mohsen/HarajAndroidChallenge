@@ -1,6 +1,5 @@
 package com.example.harajtask.utils
 
-import android.text.format.DateUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
@@ -12,17 +11,22 @@ import com.squareup.picasso.Picasso
 fun loadImage(imageView: ImageView, url: String?) {
     Picasso.get()
         .load(url)
-        .placeholder(AppCompatResources.getDrawable(imageView.context,R.drawable.ic_launcher_background)!!)
-        .error(AppCompatResources.getDrawable(imageView.context,R.drawable.ic_launcher_background)!!)
+        .placeholder(
+            AppCompatResources.getDrawable(
+                imageView.context,
+                R.drawable.ic_launcher_background
+            )!!
+        )
+        .error(
+            AppCompatResources.getDrawable(
+                imageView.context,
+                R.drawable.ic_launcher_background
+            )!!
+        )
         .into(imageView)
 }
 
 @BindingAdapter("app:timeText")
 fun timeText(textView: TextView, timeStamp: Long) {
-    textView.text = DateUtils.getRelativeTimeSpanString(
-        timeStamp,
-        System.currentTimeMillis(),
-        DateUtils.MINUTE_IN_MILLIS,
-        DateUtils.FORMAT_ABBREV_RELATIVE
-    )
+    textView.text = DateUtils.getTimeString(timeStamp)
 }
